@@ -1,4 +1,5 @@
-# data taken from: https://www2.gov.bc.ca/gov/content/safety/wildfire-status/about-bcws/wildfire-statistics
+# 2023 wildfires data taken from: https://open.canada.ca/data/en/dataset/2790e3f7-6395-4230-8545-04efb5a18800
+# 2015-2017 wildfires data taken from: https://www2.gov.bc.ca/gov/content/safety/wildfire-status/about-bcws/wildfire-statistics
 # more data: https://cfs.nrcan.gc.ca/statsprofile/disturbance/CA
 # carbon data
 #https://cfs.nrcan.gc.ca/statsprofile/carbon
@@ -13,20 +14,20 @@ app = dash.Dash(__name__)
 
 def create_plot():
     print("Getting data...")
-    df = pd.read_csv("general_data_part.csv")
+    df = pd.read_csv("wildfires.csv")
 
     # Create a scatter mapbox plot
     fig = px.scatter_mapbox(df,
-                            lat='latitude',
-                            lon='longitude',
+                            lat='Latitude',
+                            lon='Longitude',
                             color='Year',
                             color_continuous_scale='Reds',
                             size='Size',
                             animation_frame='Year',
                             zoom=4,
                             height=750,
-                            title="Forest Fire Impact Map",
-                            hover_name='Geographic',
+                            title="Wildfire Locations Map BC",
+                            hover_name='Location',
                             )
 
     fig.update_layout(mapbox_style="carto-darkmatter")
@@ -118,7 +119,7 @@ def create_line_graph():
 
 app.layout = html.Div(style={'backgroundColor': 'black', 'width': '100vw', 'height': '100vh'},
                       children=[
-                          html.H1("Forest Fire Impact Map", style={'textAlign': 'center', 'color': 'white'}),
+                          html.H1("Wildfire Locations Map BC", style={'textAlign': 'center', 'color': 'white'}),
                           dcc.Graph(figure=create_plot(), style={'width': '100%'}),  
                           html.H2("CO2 Data Summary", style={'backgroundColor': 'black','textAlign': 'center', 'color': 'green', 'margin': '0'}),
                           dcc.Graph(figure=create_line_graph())  
