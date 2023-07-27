@@ -26,7 +26,7 @@ def create_plot():
                             animation_frame='Year',
                             zoom=4,
                             height=750,
-                            hover_name='Geographic',
+                            hover_name='Location',
                             )
 
     fig.update_layout(mapbox_style="open-street-map")
@@ -99,7 +99,8 @@ def create_line_graph():
         xaxis_title="Year",
         yaxis_title="CO2 Emissions (megatonnes)",
         legend=dict(
-            x=0,
+            x=0.5,
+            xanchor='center',
             y=0.9,
             xref="paper",
             yref="container",
@@ -116,12 +117,12 @@ def create_line_graph():
 
 
 
-app.layout = html.Div(style={'margin':'0', 'backgroundColor': 'white', 'width': '100vw', 'height': '100vh'},
+app.layout = html.Div(style={'margin':'0 0 0 0','backgroundColor': 'white', 'width': '100vw', 'height': '100vh'},
                       children=[
                           html.H1("Forest Fire Impact Map", style={'textAlign': 'center', 'color': 'black'}),
-                          dcc.Graph(figure=create_plot(), style={'width': '100%'}),  
-                          html.H2("CO2 Data Summary", style={'backgroundColor': 'white','textAlign': 'center', 'color': 'black', 'margin': '0'}),
-                          dcc.Graph(figure=create_line_graph())  
+                          dcc.Graph(figure=create_plot(), style={'width': '100%'}),
+                          html.H2("CO2 Data Summary", style={'backgroundColor': 'white', 'textAlign': 'center', 'color': 'black', 'margin': '80px 0 0 0'}),
+                          dcc.Graph(figure=create_line_graph())
                       ])
 
 if __name__ == '__main__':
