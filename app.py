@@ -25,19 +25,18 @@ def create_plot():
                             animation_frame='Year',
                             zoom=4,
                             height=750,
-                            title="Forest Fire Impact Map",
                             hover_name='Geographic',
                             )
 
-    fig.update_layout(mapbox_style="carto-darkmatter")
+    fig.update_layout(mapbox_style="open-street-map")
     fig.update_layout(margin={"r": 0, "t": 0, "b": 0})
-    fig.update_layout(plot_bgcolor='white', paper_bgcolor='black')  
+    fig.update_layout(plot_bgcolor='white', paper_bgcolor='white')  
 
     # Set tickvals for the color bar legend to show only whole numbers for the year
     fig.update_coloraxes(colorbar_tickvals=sorted(df['Year'].unique(), reverse=True))
 
-    fig.update_layout(coloraxis_colorbar_title_font_color='white')
-    fig.update_layout(coloraxis_colorbar_tickfont_color='white')
+    fig.update_layout(coloraxis_colorbar_title_font_color='black')
+    fig.update_layout(coloraxis_colorbar_tickfont_color='black')
 
     fig.update_layout(
         updatemenus=[
@@ -63,16 +62,16 @@ def create_plot():
                 xanchor="right",
                 y=0,
                 yanchor="top",
-                font_color='white'  
+                font_color='black'  
             )
         ],
         sliders=[
             dict(
                 active=0,
-                currentvalue={"prefix": "Year: ", "font": {"color": "white"}},  
+                currentvalue={"prefix": "Year: ", "font": {"color": "black"}},  
                 pad={"t": 50, "l":10},
                 steps=[],
-                font_color='white'  
+                font_color='black'  
             )
         ],
     )
@@ -94,7 +93,7 @@ def create_line_graph():
             xref="paper",
             yref="container",
             x=0.5,  
-            font=dict(color="white"),  
+            font=dict(color="black"),  
         ),
         xaxis_title="Year",
         yaxis_title="CO2 Emissions (megatonnes)",
@@ -103,24 +102,24 @@ def create_line_graph():
             y=0.9,
             xref="paper",
             yref="container",
-            bgcolor="black",
-            title=dict(text="Emissions Categories", font=dict(color="white")),  
-            font=dict(color="white"),  
+            bgcolor="white",
+            title=dict(text="Emissions Categories", font=dict(color="black")),  
+            font=dict(color="black"),  
         ),
-        plot_bgcolor='black',  
-        paper_bgcolor='black',  
-        font=dict(color="white"),  
+        plot_bgcolor='white',  
+        paper_bgcolor='white',  
+        font=dict(color="black"),  
     )
 
     return fig
 
 
 
-app.layout = html.Div(style={'backgroundColor': 'black', 'width': '100vw', 'height': '100vh'},
+app.layout = html.Div(style={'margin':'0', 'backgroundColor': 'white', 'width': '100vw', 'height': '100vh'},
                       children=[
-                          html.H1("Forest Fire Impact Map", style={'textAlign': 'center', 'color': 'white'}),
+                          html.H1("Forest Fire Impact Map", style={'textAlign': 'center', 'color': 'black'}),
                           dcc.Graph(figure=create_plot(), style={'width': '100%'}),  
-                          html.H2("CO2 Data Summary", style={'backgroundColor': 'black','textAlign': 'center', 'color': 'green', 'margin': '0'}),
+                          html.H2("CO2 Data Summary", style={'backgroundColor': 'white','textAlign': 'center', 'color': 'black', 'margin': '0'}),
                           dcc.Graph(figure=create_line_graph())  
                       ])
 
